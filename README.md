@@ -89,6 +89,7 @@ insert Todo{
 ```
 
 This is what you should see in your console:
+
 ![Inserting TODO tasks](static/insert.jpg)
 
 If you run this:
@@ -97,6 +98,7 @@ If you run this:
 edgedb> select Todo{title};
 ```
 You should get something like this:
+
 ![Inserting TODO tasks](static/select.jpg)
 
 
