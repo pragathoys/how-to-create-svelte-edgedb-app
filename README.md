@@ -59,6 +59,45 @@ edgedb migration create
 edgedb migrate
 ```
 
+## Seeding
+
+So far we have create the database schema but with no data inside so lets add the following three Tasks:
+
+* Go dog for a walk
+* Go to the supermarket
+* Wash my car!
+
+```bash
+# open the CLI
+edgedb
+```
+
+and paste these into it:
+
+```sql
+insert Todo{
+	title := 'Go dog for a walk'
+};
+
+insert Todo{
+	title := 'Go to the supermarket'
+};
+
+insert Todo{
+	title := 'Wash my car!'
+};
+```
+
+This is what you should see in your console:
+![Inserting TODO tasks](static/insert.jpg)
+
+If you run this:
+```bash
+# open the CLI
+edgedb> select Todo{title};
+```
+You should get something like this:
+![Inserting TODO tasks](static/select.jpg)
 
 
 ## Developing
