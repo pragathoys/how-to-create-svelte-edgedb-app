@@ -24,6 +24,43 @@ npm install
 npm install edgedb
 ```
 
+## Initialize the EdgeDB instance and Create the database schema
+
+```bash
+# go inside the folder
+cd my-app
+
+# initialize a new project
+# when asked select 'Y' (yes)
+# leave the otheroptions as default
+edgedb project init
+```
+
+Now lets create the database schema!
+
+We want to create a simple structure with just a 'title' field to hold our todo list of tasks.
+
+So open the file /dbschema/default.esdl and paste this inside:
+
+```sql
+module default {
+	type Todo{
+		required property title -> str;
+	}
+}
+```
+Now lets migrate!
+
+```bash
+# create the migration
+edgedb migration create
+
+# and migrate
+edgedb migrate
+```
+
+
+
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
