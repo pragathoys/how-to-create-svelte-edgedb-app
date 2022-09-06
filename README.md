@@ -101,17 +101,85 @@ You should get something like this:
 
 ![Inserting TODO tasks](static/select.jpg)
 
+## Lets display the Data!
 
-## Developing
+Create a file name '+page.server.js' inside the folder 'src/routes' and paste this content inside it:
+
+```javascript
+import { error } from '@sveltejs/kit';
+
+import * as edgedb from "edgedb";
+
+ 
+/** @type {import('./$types').PageServerLoad} */
+export async function load({ params }) {
+
+	const client = edgedb.createClient();
+
+	const todos = await client.query(`select Todo{title};`);
+
+	return { todos: todos };
+ 
+  throw error(404, 'Not found');
+}
+```
+
+Now open the file  '+page.svelte' inside the folder 'src/routes' and paste this content inside it:
+
+```html
+<script>
+	/** @type {import('./$types').PageData} */
+	export let data;
+  
+  </script>
+  
+  <h1>Todo List</h1>
+  <p>Below you will find a list of tasks that are available in our EdgeDB:</p>
+  
+  <ul>
+	  {#if data.todos.length==0}
+	  <li><span class="error">No todos found :(</span></li>
+	  {:else}
+		  {#each data.todos as todo}
+			  <li><span class="title">{todo.title}</span></li>
+		  {/each}
+	  {/if}
+  </ul>
+  
+  <style>
+	  li{
+		  background-color: #fff;
+		  border:1px solid #efefef;
+		  margin-bottom:5px;
+		  padding:10px;
+	  }
+  
+	  .title{
+		  font-size: 22px;
+		  font-weight: bold;
+	  }
+  
+	  .error{
+		  color:crimson;
+	  }
+  </style>
+  
+```
+
+
+## Test while developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
+
+Point your browser at: http://localhost:5173/
+
+You should see something like this:
+
+![The Todo app](static/list.jpg)
 
 ## Building
 
