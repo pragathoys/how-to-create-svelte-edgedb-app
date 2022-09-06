@@ -1,17 +1,27 @@
-# create-svelte
+# SvelteKit and EdgeDB Howto
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This is a short tutorial on how to quickly scaffold a Svelte app and load data from the EdgeDB
 
-## Creating a project
+## Prerequisities
 
-If you're seeing this, you've probably already done this step. Congrats!
+Make sure you have install npm and nodejs
+
+## Creating the structure of the project
+
+Lets say that we want to create a web app named as 'my-app'.
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
 # create a new project in my-app
+# when asked select 'Skelton app' and Javascript.
 npm create svelte@latest my-app
+
+
+# go inside the folder
+cd my-app
+
+# install node modules
+npm install
+npm install edgedb
 ```
 
 ## Developing
